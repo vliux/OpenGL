@@ -24,7 +24,7 @@ public class FirstOpenGLProjectActivity extends Activity {
         ConfigurationInfo configurationInfo = am.getDeviceConfigurationInfo();
         boolean supportEs2 = configurationInfo.reqGlEsVersion >= 0x20000;
         if(supportEs2){
-            glSurfaceView.setRenderer(new FirstOpenGLProjectRenderer());
+            glSurfaceView.setRenderer(new AirHockeyRenderer(this));
             rendererSet = true;
             setContentView(glSurfaceView);
         }else{
