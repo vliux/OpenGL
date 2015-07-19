@@ -18,9 +18,11 @@ import static android.opengl.GLES20.*;
 public class AirHockeyRenderer implements GLSurfaceView.Renderer {
     private static final int POSITION_COMPONENT_COUNT = 2;
     private static final int BYTES_PER_FLOAT = 4;
-    private final FloatBuffer vertexData;
 
+    private final FloatBuffer vertexData;
     private Context context;
+    private int program;
+
     public AirHockeyRenderer(Context context) {
         this.context = context;
         float[] tableVerticesWithTriangles = new float[]{
@@ -53,6 +55,11 @@ public class AirHockeyRenderer implements GLSurfaceView.Renderer {
 
         String fragmentShaderSource = TextResourceReader.readTextFileFromResource(context, R.raw.simple_fragment_shader);
         int fragmentShader = ShaderHelper.compileFragmentShader(fragmentShaderSource);
+
+        program = ShaderHelper.linkProgram(vertextShader, fragmentShader);
+        if(ShaderHelper.validateProgram(program)) {
+            glUseProgram(program);
+        }
     }
 
     @Override
