@@ -19,6 +19,10 @@ public class FirstOpenGLProjectActivity extends Activity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         glSurfaceView = new GLSurfaceView(this);
+        // missing in sample code of the book
+        // if not called, lots of "call unimplemented OpenGL ES API" will be logged
+        // I guess GL1.0 is used if not called
+        glSurfaceView.setEGLContextClientVersion(2);
 
         ActivityManager am = (ActivityManager)getSystemService(Context.ACTIVITY_SERVICE);
         ConfigurationInfo configurationInfo = am.getDeviceConfigurationInfo();
